@@ -12,5 +12,3 @@ CreateRemoteThreadを利用したをシンプルなインジェクターです�
 4.GetProcAddressでKernel32.dll内のLoadLibraryAの関数アドレスを取得します。(Kernel32.dllのLoadLibraryAはすべてのプロセスで共有してるため、従ってすべてのプロセスRVAは共通です)
 
 5.CreateRemoteThreadでLのターゲットプロセスのスレッドを開始します、スレッドエントリポイントは先ほど確保したLoadLibraryAのメモリー関数アドレスです。
-# Simple_Injector
-# Simple_Injector
