@@ -25,32 +25,9 @@ DWORD get_pid_byname(const char* process_name)
     return pid;
 }
 
-DWORD get_thread_id(int pid)
-{
-    DWORD ThreadID = 0;
-    HANDLE hsnap = CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
-
-    if (hsnap != INVALID_HANDLE_VALUE)
-    {
-        THREADENTRY32 thread_entry{};
-        thread_entry.dwSize = sizeof(thread_entry);
-
-        while (Thread32Next(hsnap, &thread_entry))
-        {
-            if (thread_entry.th32OwnerProcessID == pid) {
-                ThreadID = thread_entry.th32ThreadID;
-                break;
-            }
-        }
-    }
-
-    CloseHandle(hsnap);
-    return ThreadID;
-}
-
 int main()
 {
-    const char* dllpath = "c:\\\\test.dll"; //バックスラッシュはエスケープ文字なので、二重に書く必要がある
+    const char* dllpath = "c:\\\\test.dll"; //インジェクトしたいDLLパスを指定(バックスラッシュはエスケープ文字なので、二重に書く必要がある)
     int pid = get_pid_byname("HXD.exe"); //ターゲットプロセスのPID
 
     std::cout << "PID:" << pid << std::endl;
