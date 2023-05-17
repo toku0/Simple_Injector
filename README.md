@@ -1,0 +1,16 @@
+# Simple_Injector
+CreateRemoteThreadを利用したをシンプルなインジェクターです。
+
+動作原理：
+
+1.ターゲットプロセスのハンドルを取得します。
+
+2.VirtualAllocExでLoadLibraryAで使用するDLLのパスのターゲットプロセスのメモリーを確保します。
+
+3.WriteProcessMemoryを使い確保したメモリー空間にDLLパスを書き込みます。
+
+4.GetProcAddressでKernel32.dll内のLoadLibraryAの関数アドレスを取得します。(Kernel32.dllのLoadLibraryAはすべてのプロセスで共有してるため、従ってすべてのプロセスRVAは共通です)
+
+5.CreateRemoteThreadでLのターゲットプロセスのスレッドを開始します、スレッドエントリポイントは先ほど確保したLoadLibraryAのメモリー関数アドレスです。
+# Simple_Injector
+# Simple_Injector
